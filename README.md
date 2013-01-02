@@ -4,7 +4,8 @@ By default running bin/gaia will drop you into the Python REPL with a short help
 
 ```python
 import gaia
-gaia.intro()``` 
+gaia.intro()
+```
 
 Motivation
 ----------
