@@ -1,10 +1,13 @@
 #!/bin/bash
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 PY=`which python 2>/dev/null`
 [ -z "$PY" ] && echo "ERROR: No python application found" && exit 1
 
-cd $DIR/../src
-$PY -c "import gaia; gaia.intro()"
-$PY -i gaia.py
+# Check if Gaia was installed as a library
+if [ -n "`python -c \"import gaia\" 2>&1 | grep ImportError`" ]; then
+    # If it wasn't then determine the current directory
+    DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    cd $DIR/../src
+fi
+
+$PY -ic "from gaia.core import *; intro()"

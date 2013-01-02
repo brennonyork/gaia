@@ -1,8 +1,9 @@
 from distutils.core import setup
-setup(name="Gaia",
+setup(name="gaia",
+      author="Brennon York",
+      author_email="brennon.york@gmail.com",
       version="1.0",
-      package_dir={"gaia":"src",
-                   "ssh":"src"},
-      packages=["gaia", "ssh"],
+      package_dir={"gaia":"src/gaia"},
+      packages=["gaia"],
       )
       

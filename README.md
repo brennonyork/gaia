@@ -3,7 +3,7 @@ Gaia is a simple provisioning system for physical nodes and clusters. At its cor
 By default running bin/gaia will drop you into the Python REPL with a short help menu to explain what each option does. To use Gaia as a library just run the setup.py module as usual (python setup.py install). From there you should be able to import gaia like any other module.
 
 ```python
-import gaia
+import gaia.core as gaia
 gaia.intro()
 ```
 
@@ -40,7 +40,7 @@ SSH Capabilities
 The SSH class handles all socket implementation details related to remote command execution. The way SSH functions allows the user to only have to type the password once for execution of all commands in the task and without the necessity of passwordless SSH. Simply, it creates a socket file once the password is put in for all future traffic to pass through if specified. Once the socket file is removed (gracefully or otherwise) the session is terminated. Upon installation of Gaia through setup.py the SSH class is installed as well.
 
 ```python
-import ssh
+import gaia.ssh as ssh
 # Create an instance of the class by defining the host and optionally the user
 # (else the current user is specified)
 module = ssh.ssh('192.168.1.1', 'root')
