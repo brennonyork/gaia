@@ -57,11 +57,11 @@ def generate(f):
 
 def intro():
     print
-    print "GAIA"
+    print "Gaia"
     print "This program is built to ease the deployment, provisioning, and setup of"
     print "physical nodes, clusters, etc. It leverages a simple configuration file to"
-    print "determine groupings of tasks and then grants a reduced set of functions to"
-    print "execute those tasks on machines. When GAIA boots up it loads the functions"
+    print "determine groupings of tasks and then grants a minimal set of functions to"
+    print "execute those tasks on machines. When Gaia boots up it loads the functions"
     print "described below into Python and drops the user into the REPL for execution."
     print
     print "load( filename ):"
@@ -79,9 +79,3 @@ def intro():
     print "\tDisplays this introduction for reference"
     print "exit():"
     print "\tExits the current python REPL and returns to the calling shell."
-
-def main(argc, argv):
-    intro()
-
-if __name__ == "__main__":
-    main(len(sys.argv), sys.argv)

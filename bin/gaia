@@ -1,6 +1,10 @@
 #!/bin/bash
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 PY=`which python 2>/dev/null`
 [ -z "$PY" ] && echo "ERROR: No python application found" && exit 1
 
+cd $DIR/../src
+$PY -c "import gaia; gaia.intro()"
 $PY -i gaia.py
