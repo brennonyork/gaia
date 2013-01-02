@@ -27,14 +27,16 @@ def show():
 def execute(env, host, user=""):
     if not (type(env) is list):
         env = [env]
-
     module = ssh.ssh(host, user)
     module.open()
     for task in env:
         if(task in _task_list):
             for i in _task_list[task]:
                 if(i[0] == "env"):
-                    indir, outdir = i[1].split(' ')
+                    try:
+                        indir, outdir = i[1].split(' ')
+                    except ValueError:
+                        print "WARN: Too many agruments for", i[0], i[1], "; omitting."
                     module.env(indir, outdir)
                 elif(i[0] == "run"):
                     module.run(i[1])
@@ -44,16 +46,22 @@ def execute(env, host, user=""):
             print "ERROR: Cannot find", task, "in the list of loaded modules."
     module.close()
 
-def generate(f):
-    with open(f, "w") as f:
-        f.write("# [ TASKNAME ]\n");
-        f.write("[sample] # <- The taskname\n")
-        f.write("# env INPUT_DIR OUTPUT_DIR\n")
-        f.write("env /tmp/dir /tmp # <- Saying to copy the 'dir' directory from '/tmp/dir' to\n")
-        f.write("                  #    '/tmp' of the remote machine\n")
-        f.write("# run COMMAND_SET\n");
-        f.write("run hostname; ls && echo \"Hello world!\" # <- Arbitrary commands to run\n")
-        f.write("                                        #    remotely\n")
+def generate(f=""):
+    conf = ["# [ TASKNAME ]",
+            "[sample] # <- The taskname",
+            "# env INPUT_DIR OUTPUT_DIR",
+            "env /tmp/dir /tmp # <- Saying to copy the 'dir' directory from '/tmp/dir' to",
+            "                  #    '/tmp' of the remote machine",
+            "# run COMMAND_SET",
+            "run hostname; ls && echo \"Hello world!\" # <- Arbitrary commands to run",
+            "                                        #    remotely"]
+    if(f):
+        with open(f, "w") as f:
+            for i in conf:
+                f.write(i+"\n")
+    else:
+        for i in conf:
+            print i
 
 def intro():
     print
@@ -72,10 +80,11 @@ def intro():
     print "show():"
     print "\tDisplays the current loaded task list and their respective individual"
     print "\ttasks."
-    print "generate( filename ):"
-    print "\tWrites a sample configuration file into the filename specified as"
-    print "\twell as helpful comments to understand the concepts."
+    print "generate( [filename] ):"
+    print "\tWrites a sample configuration file either to stdout or into the file if"
+    print "\tone was specified."
     print "intro():"
     print "\tDisplays this introduction for reference"
     print "exit():"
     print "\tExits the current python REPL and returns to the calling shell."
+
