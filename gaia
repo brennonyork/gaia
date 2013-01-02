@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PY=`which python 2>/dev/null`
+[ -z "$PY" ] && echo "ERROR: No python application found" && exit 1
+
+$PY -i gaia.py
