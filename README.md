@@ -13,5 +13,6 @@ I found, after multiple installations of Hadoop, Zookeeper, Storm, Accumulo, <di
 
 FAQs
 ----
-Q: Why does GAIA natively drop the user into the Python REPL?</br>
-A: Because.
+<ul><li>Q: Why does GAIA natively drop the user into the Python REPL?</li>
+<li>A: Because.</li>
+</ul>
