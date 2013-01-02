@@ -1,6 +1,6 @@
 Gaia is a simple provisioning system for physical nodes and clusters. At its core it acts much like make, but at a distributed level leveraging a few tricks within SSH to ease password management and a trivial configuration file to define sets of tasks. Moreover, it was built to be used as either a one-off script or as a library to programmatically setup for different clusters depending on your environment.
 
-By default running bin/gaia will drop you into the Python REPL with a short help menu to explain what each option does. To use Gaia as a library just grab the src directory (gaia.py and ssh.py) and include gaia within your Python script.
+By default running bin/gaia will drop you into the Python REPL with a short help menu to explain what each option does. To use Gaia as a library just run the setup.py module as usual (python setup.py install). From there you should be able to import gaia like any other module.
 
 ```python
 import gaia
