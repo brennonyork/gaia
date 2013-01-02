@@ -9,11 +9,26 @@ gaia.intro()
 
 Configuration Files
 -------------------
-Here is what we've got so far.
+Here is a sample configuration file that walks you through how and what you can do within them. The file can be named anything so long as the contents subscribe to the below schema for Gaia to read it.
 
 ```bash
-[hadoop:namenode]
-run ls; hostname
+# First define a task and give it a name surrounded by brackets. Don't worry
+# too hard about naming conventions, just do what feels right!
+[myTask]
+# Gaia reads the file top-down so next comes the set of commands for a given
+# task. There are two core options; those being 'run' and 'env'. The former
+# will act as a remote SSH call while the latter will act as SCP from the
+# local source directory to the remote target directory.
+env /tmp/src /tmp
+run tar -xzf /tmp/src/sometarball.tgz
+run cd /tmp/src/sometarball/bin && chmod 755 ./item_in_bin && ./item_in_bin
+# Once you're done put as many newlines (or not) between your old task and
+# new one. From there you can define another task (if you like) and continue
+# on. Gaia does not have a mandate on the number of tasks one can define in
+# a given file.
+[mySecondTask]
+run su - otherUser -c "hostname && ls /tmp"
+# Thats it!
 ```
 
 Motivation
@@ -22,7 +37,7 @@ I found, after multiple installations of Hadoop, Zookeeper, Storm, Accumulo, <di
 
 SSH Capabilities
 ----------------
-The ssh class handles all socket implementation details related to remote command execution. The way ssh functions allows the user to only have to type the password once for execution of all commands in the task and without the necessity of passwordless ssh. Simply, it creates a socket file once the password is put in for all future traffic to pass through if specified. Once the socket file is removed (gracefully or otherwise) the session is terminated. Upon installation of Gaia through setup.py the ssh class is installed as well.
+The SSH class handles all socket implementation details related to remote command execution. The way SSH functions allows the user to only have to type the password once for execution of all commands in the task and without the necessity of passwordless SSH. Simply, it creates a socket file once the password is put in for all future traffic to pass through if specified. Once the socket file is removed (gracefully or otherwise) the session is terminated. Upon installation of Gaia through setup.py the SSH class is installed as well.
 
 ```python
 import ssh
