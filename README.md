@@ -13,6 +13,5 @@ I found, after multiple installations of Hadoop, Zookeeper, Storm, Accumulo, <di
 
 FAQs
 ----
-<ul><li>Q: Why does GAIA natively drop the user into the Python REPL?</li>
-<li>A: Because.</li>
-</ul>
+Why does Gaia natively drop the user into the Python REPL?
+<ul><li>I wanted to ensure that users had a way of displaying the current configuration loaded into the system, especially if they were pulling from multiple files. Because loading files happens on a per-user basis the REPL seemed the best option so that a single show() function could be called. This alleviated longer shell calls with multiple flags (such as loading a configuration only to display its contents).</li></ul>
