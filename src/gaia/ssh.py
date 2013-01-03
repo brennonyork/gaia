@@ -22,7 +22,7 @@ class ssh:
 
     # Acts as an SCP command moving, recursively, the indir to the outdir
     def env(self, indir, outdir):
-        sp.Popen(["scp", "-r", "-o", self.path, indir, self.host+':'+outdir]).wait()
+        sp.Popen(["scp", "-qr", "-o", self.path, indir, self.host+':'+outdir]).wait()
 
     # Acts as an SSH command on the remote machine
     def run(self, cmd):
